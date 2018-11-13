@@ -28,11 +28,35 @@ class UsersController < ApplicationController
 end
 
   #what routes do I need for signup?
+  #this route's job is to render the signup form
   get '/signup' do
+   #erb (render a view)
+   erb :signup
   end
+
+  post '/users' do
+    #here is where we will create a new user and persisthe user to the database
+    if params[:name] != "" && params[:user_name=] != "" && params[:password] != ""
+      #valid input
+      @user = User.create(params)
+        session[:user_id] = @user.id
+    #go to user show page
+    redirect "/users/#{@user.id}"
+  else
+    redirect '/signup'
+  end
+end
 
   #user SHOW route
   get '/users/:id' do
-    "this will be the user show route"
+  #create an instance variable for the user by pulling from the database
+  @user = User.find_by(id: params[:id])
+  erb :'/users/show'
   end
+
+  get '/logout' do
+    session.clear
+    redirect '/'
+  end
+
 end
