@@ -20,8 +20,24 @@ class ResponseEntriesController < ApplicationController
     end
   end
     #show route for a response
+  get '/response_entries/:id' do
+    @response_entry = ResponseEntry.find(params[:id])
+    set_response_entry
+    erb :'/response_entries/show'
+  end
+
+  #This route should send us to journal_entries/edit.erb which will
+  #render an edit form
+  get '/response_entries/:id/edit' do
+    erb :'/response_entries/edit'
+  end
 
   #index route for all responses
+  private
+
+   def set_response_entry
+   @response_entry = ResponseEntry.find(params[:id])
+   end
 
 
 end
