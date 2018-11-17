@@ -4,6 +4,8 @@ class ResponseEntriesController < ApplicationController
   get '/response_entries/new' do
     erb :'/response_entries/new'
   end
+
+
   #post response_entries to create a new response entry
   post '/response_entries' do
     #create a new entry and save it to the db
@@ -19,25 +21,45 @@ class ResponseEntriesController < ApplicationController
       redirect '/response_entries/new'
     end
   end
-    #show route for a response
+
+
+  #show route for a response
   get '/response_entries/:id' do
     @response_entry = ResponseEntry.find(params[:id])
     set_response_entry
     erb :'/response_entries/show'
   end
 
-  #This route should send us to journal_entries/edit.erb which will
+
   #render an edit form
   get '/response_entries/:id/edit' do
+    set_response_entry
+    if logged_in?
+    if @response_entry.user == current_user
     erb :'/response_entries/edit'
+    else
+      redirect "users/#{current_user.id}"
+    end
+  else
+    redirect '/'
+  end
+
+  #apply edits from edit form
+  patch '/response_entries/:id' do
+  #find journal entry
+    set_response_entry
+  #modify the journal entry
+    @response_entry.update(content: params[:content])
+  #redirect to show page
+    redirect "/response_entries/#{@response_entry.id}"
   end
 
   #index route for all responses
-  private
 
+  private
    def set_response_entry
    @response_entry = ResponseEntry.find(params[:id])
    end
 
-
+end
 end

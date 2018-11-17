@@ -1,1 +1,8 @@
 EDIT FORM GOES HERE
+
+<form class="" action="/response_entries/<%= @response_entry.id %>" method="post">
+<input type="hidden" name="_method" value="patch">
+<label for="content">Content</label>
+<textarea name="content" style="width:auto; height:auto;"><%=@response_entry.content %>"></textarea>
+<input type="submit" name="" value="Create Entry">
+</form>
