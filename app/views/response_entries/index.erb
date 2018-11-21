@@ -1,1 +1,9 @@
 INDEX PAGE FOR RESPONSES
+<br>
+<br>
+<% @response_entries.each do |response_entry| %>
+<h4><a href="/response_entries/<%= response_entry.id %>"><%= response_entry.created_at %></a></h4>
+<p><%= response_entry.content %></p>
+<p>By <%= response_entry.user.name %><p>
+  <br><br>
+<% end %>

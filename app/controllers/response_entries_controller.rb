@@ -1,5 +1,10 @@
 class ResponseEntriesController < ApplicationController
 
+  get '/response_entries' do
+    @response_entries = ResponseEntry.all
+    erb :'response_entries/index'
+  end
+
   #get response_entries/new to render a form to create new entry
   get '/response_entries/new' do
     erb :'/response_entries/new'
@@ -35,6 +40,7 @@ class ResponseEntriesController < ApplicationController
   get '/response_entries/:id/edit' do
     set_response_entry
     if logged_in?
+      if authorized_to_edit?(@response_entry)
     if @response_entry.user == current_user
     erb :'/response_entries/edit'
     else
@@ -53,13 +59,14 @@ class ResponseEntriesController < ApplicationController
   #redirect to show page
     redirect "/response_entries/#{@response_entry.id}"
   end
+end
 
   #index route for all responses
 
   private
+
    def set_response_entry
    @response_entry = ResponseEntry.find(params[:id])
    end
 
-end
 end
