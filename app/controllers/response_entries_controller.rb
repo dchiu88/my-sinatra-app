@@ -41,32 +41,51 @@ class ResponseEntriesController < ApplicationController
     set_response_entry
     if logged_in?
       if authorized_to_edit?(@response_entry)
-    if @response_entry.user == current_user
-    erb :'/response_entries/edit'
-    else
-      redirect "users/#{current_user.id}"
+        erb :'/response_entries/edit'
+      else
+        redirect "users/#{current_user.id}"
     end
   else
     redirect '/'
   end
+end
 
   #apply edits from edit form
   patch '/response_entries/:id' do
   #find journal entry
     set_response_entry
+    if logged_in?
+      if authorized_to_edit?(@response_entry)
   #modify the journal entry
     @response_entry.update(content: params[:content])
   #redirect to show page
     redirect "/response_entries/#{@response_entry.id}"
+    else
+    redirect "users/#{current_user.id}"
+        end
+      else
+        redirect '/'
+      end
+    end
+
+  delete '/response_entries/:id' do
+  set_response_entry
+  if authorized_to_edit?(@response_entry)
+    @response_entry.destroy
+    redirect '/response_entries'
+  else
+    redirect '/response_entries'
   end
 end
+end
+
+
+
 
   #index route for all responses
 
   private
 
-   def set_response_entry
+  def set_response_entry
    @response_entry = ResponseEntry.find(params[:id])
-   end
-
-end
+  end

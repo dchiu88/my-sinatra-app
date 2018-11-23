@@ -3,6 +3,9 @@ SHOW PAGE FOR ENTRIES
 
 <% if authorized_to_edit?(@response_entry) %>
  <a href="/response_entries/<%= @response_entry.id %>/edit">Edit Entry</a>
-
- Delete link
+ <br><br>
+ <form class="" action="/response_entries/<%= @response_entry.id %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" name="" value="Delete this Entry">
+ </form>
  <% end %>

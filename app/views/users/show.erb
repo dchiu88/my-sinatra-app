@@ -1,6 +1,4 @@
 <h2><%= @user.name.upcase %>'s show page</h2>
-
-<!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -182,11 +180,10 @@ function autocomplete(inp, arr) {
 }
 
 /*An array containing all the country names in the world:*/
-
-<%= test = ["abc","def","ghi"] %>
+<% binding.pry %>
+<% test = ResponseEntry.where(user_id: '1').pluck(:content) %>
 
 var entries = <%= test %>
-
 /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
 autocomplete(document.getElementById("myInput"), entries);
 </script>
