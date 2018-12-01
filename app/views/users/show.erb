@@ -68,9 +68,13 @@ input[type=submit] {
 
 <body>
 <br>
-<h2>Find Previous Responses</h2>
-
-<p>Start typing:</p>
+<br>
+<br>
+<h2 align="center">Find Previous Responses</h2>
+<br>
+<br>
+<br>
+<center>
 
 <!--Make sure the form has the autocomplete function switched off:-->
 <form autocomplete="off" action="/action_page.php">
@@ -185,6 +189,7 @@ var entries = <%= test %>
 /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
 autocomplete(document.getElementById("myInput"), entries);
 </script>
+</center>
 <br>
 <h3 align="right">Logged in as: <%= @user.name %></h3>
 <br>
