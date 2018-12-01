@@ -2,7 +2,7 @@ class ResponseEntriesController < ApplicationController
 
   get '/response_entries' do
     @response_entries = ResponseEntry.all
-    erb :'response_entries/index'
+    erb :'/response_entries/index'
   end
 
   #get response_entries/new to render a form to create new entry

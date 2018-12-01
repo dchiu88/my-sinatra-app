@@ -83,7 +83,7 @@ input[type=submit] {
   </div>
   <input type="submit">
 </form>
-
+</center>
 <script>
 function autocomplete(inp, arr) {
   /*the autocomplete function takes two arguments,
@@ -183,13 +183,13 @@ function autocomplete(inp, arr) {
 }
 
 /*An array containing all the country names in the world:*/
-<% test = ResponseEntry.where(user_id: '1').pluck(:content) %>
+<% test = ResponseEntry.where(user_id: session[:user_id]).pluck(:content) %>
 
 var entries = <%= test %>
 /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
 autocomplete(document.getElementById("myInput"), entries);
 </script>
-</center>
+
 <br>
 <br>
 <br>
