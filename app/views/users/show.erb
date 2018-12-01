@@ -1,4 +1,3 @@
-<h2><%= @user.name.upcase %>'s show page</h2>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -68,7 +67,7 @@ input[type=submit] {
 </head>
 
 <body>
-
+<br>
 <h2>Find Previous Responses</h2>
 
 <p>Start typing:</p>
@@ -186,6 +185,9 @@ var entries = <%= test %>
 /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
 autocomplete(document.getElementById("myInput"), entries);
 </script>
-
+<br>
+<h3 align="right">Logged in as: <%= @user.name %></h3>
+<br>
+<br>
 </body>
 </html>
