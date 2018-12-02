@@ -74,16 +74,16 @@ input[type=submit] {
 <br>
 <br>
 <br>
-<center>
+
 
 <!--Make sure the form has the autocomplete function switched off:-->
-<form autocomplete="off" action="/action_page.php">
-  <div class="autocomplete" style="width:300px;">
+
+<form autocomplete="off" action="/action_page.php" align="center">
+  <div class="autocomplete" style="width:300px;" align="left">
     <input id="myInput" type="text" name="myCountry" placeholder="Previous Responses">
   </div>
   <input type="submit">
 </form>
-</center>
 <script>
 function autocomplete(inp, arr) {
   /*the autocomplete function takes two arguments,
@@ -183,13 +183,12 @@ function autocomplete(inp, arr) {
 }
 
 /*An array containing all the country names in the world:*/
-<% test = ResponseEntry.where(user_id: session[:user_id]).pluck(:content) %>
+<% responses = ResponseEntry.where(user_id: session[:user_id]).pluck(:content) %>
 
-var entries = <%= test %>
+var entries = <%= responses %>
 /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
 autocomplete(document.getElementById("myInput"), entries);
 </script>
-
 <br>
 <br>
 <br>
