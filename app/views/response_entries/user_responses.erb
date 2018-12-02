@@ -1,0 +1,7 @@
+My Responses
+<br>
+<br>
+<% @my_response_entries.to_enum.with_index(1).each do |response_entry, i| %>
+<%= i %>. <%= response_entry %>
+  <br><br>
+<% end %>

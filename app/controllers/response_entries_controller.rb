@@ -1,9 +1,22 @@
 class ResponseEntriesController < ApplicationController
 
   get '/response_entries' do
-    @response_entries = ResponseEntry.all
-    erb :'/response_entries/index'
+    if logged_in?
+      @response_entries = ResponseEntry.all
+      erb :'/response_entries/index'
+    else
+      redirect '/'
+    end
   end
+
+  get '/response_entries/user_responses' do
+    if logged_in?
+      @my_response_entries = ResponseEntry.where(user_id: session[:user_id]).pluck(:content)
+      erb :'/response_entries/user_responses'
+    else
+      redirect '/'
+  end
+end
 
   #get response_entries/new to render a form to create new entry
   get '/response_entries/new' do
