@@ -78,14 +78,14 @@ input[type=submit] {
 
 <!--Make sure the form has the autocomplete function switched off:-->
 
-<form autocomplete="off" action="/action_page.php" align="center">
+<form autocomplete="off" align="center">
   <div class="autocomplete" style="width:300px;" align="left">
-    <input id="myInput" type="text" name="myCountry" placeholder="Previous Responses">
+    <input id="myInput" type="text" placeholder="Previous Responses">
   </div>
-  <input type="submit">
+  <button onclick="myFunction()">Copy text</button>
 </form>
 <script>
-function autocomplete(inp, arr) {
+  function autocomplete(inp, arr) {
   /*the autocomplete function takes two arguments,
   the text field element and an array of possible autocompleted values:*/
   var currentFocus;
@@ -180,6 +180,32 @@ function autocomplete(inp, arr) {
   document.addEventListener("click", function (e) {
       closeAllLists(e.target);
   });
+}
+
+function myFunction() {
+  /* Get the text field */
+  var copyText = document.getElementById("myInput");
+
+  /* Select the text field */
+  copyText.select();
+
+  /* Copy the text inside the text field */
+  document.execCommand("copy");
+
+  /* Alert the copied text */
+  alert("Copied the text: " + copyText.value);
+}function myFunction() {
+  /* Get the text field */
+  var copyText = document.getElementById("myInput");
+
+  /* Select the text field */
+  copyText.select();
+
+  /* Copy the text inside the text field */
+  document.execCommand("copy");
+
+  /* Alert the copied text */
+  alert("Copied the text: " + copyText.value);
 }
 
 /*An array containing all the country names in the world:*/

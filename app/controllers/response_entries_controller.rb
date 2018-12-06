@@ -15,12 +15,16 @@ class ResponseEntriesController < ApplicationController
       erb :'/response_entries/user_responses'
     else
       redirect '/'
+    end
   end
-end
 
   #get response_entries/new to render a form to create new entry
   get '/response_entries/new' do
-    erb :'/response_entries/new'
+    if logged_in?
+      erb :'/response_entries/new'
+    else
+      redirect '/'
+    end
   end
 
 
@@ -38,7 +42,7 @@ end
     else
       redirect '/response_entries/new'
     end
-  end
+   end
 
 
   #show route for a response
@@ -57,11 +61,11 @@ end
         erb :'/response_entries/edit'
       else
         redirect "users/#{current_user.id}"
-    end
-  else
+      end
+    else
     redirect '/'
+    end
   end
-end
 
   #apply edits from edit form
   patch '/response_entries/:id' do
@@ -70,30 +74,28 @@ end
     if logged_in?
       if authorized_to_edit?(@response_entry)
   #modify the journal entry
-    @response_entry.update(content: params[:content])
+        @response_entry.update(content: params[:content])
   #redirect to show page
-    redirect "/response_entries/#{@response_entry.id}"
-    else
-    redirect "users/#{current_user.id}"
-        end
+        redirect "/response_entries/#{@response_entry.id}"
       else
-        redirect '/'
+        redirect "users/#{current_user.id}"
       end
+    else
+        redirect '/'
     end
+  end
 
   delete '/response_entries/:id' do
-  set_response_entry
-  if authorized_to_edit?(@response_entry)
-    @response_entry.destroy
-    redirect '/response_entries'
-  else
-    redirect '/response_entries'
+    set_response_entry
+    if authorized_to_edit?(@response_entry)
+      @response_entry.destroy
+      redirect '/response_entries'
+    else
+      redirect '/response_entries'
+    end
   end
+
 end
-end
-
-
-
 
   #index route for all responses
 

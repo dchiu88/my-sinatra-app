@@ -16,17 +16,16 @@ class UsersController < ApplicationController
     @user.authenticate(params[:password])
     #undefined method "authenticate for nil:NilClass
     if @user.authenticate(params[:password])
-    #log the user in
-    session[:user_id] = @user.id
-    #redirect to the user's landing page
-    puts session
-    redirect "users/#{@user.id}"
-  else
-    #tell user they entered invalid credentials
-    #redirect to login page
+      #log the user in
+      session[:user_id] = @user.id
+      #redirect to the user's landing page
+      puts session
+      redirect "users/#{@user.id}"
+    else
+      #redirect to login page
     redirect '/login'
+    end
   end
-end
 
   #what routes do I need for signup?
   #this route's job is to render the signup form
@@ -40,19 +39,19 @@ end
     if params[:name] != "" && params[:user_name=] != "" && params[:password] != ""
       #valid input
       @user = User.create(params)
-        session[:user_id] = @user.id
-    #go to user show page
-    redirect "/users/#{@user.id}"
-  else
-    redirect '/signup'
+      session[:user_id] = @user.id
+      #go to user show page
+      redirect "/users/#{@user.id}"
+    else
+      redirect '/signup'
+    end
   end
-end
 
   #user SHOW route
   get '/users/:id' do
   #create an instance variable for the user by pulling from the database
-  @user = User.find_by(id: params[:id])
-  erb :'/users/show'
+    @user = User.find_by(id: params[:id])
+    erb :'/users/show'
   end
 
   get '/logout' do
