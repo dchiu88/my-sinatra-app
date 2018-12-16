@@ -4,7 +4,9 @@
 <br>
 <br>
 <br>
-<% @my_response_entries.to_enum.with_index(1).each do |response_entry, i| %>
-<%= i %>. <%= response_entry %>
+<ol>
+<% @my_response_entries.each do |response_entry| %>
+<li> <%= response_entry %> </li
   <br><br>
 <% end %>
+</ol>
